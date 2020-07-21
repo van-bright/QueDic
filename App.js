@@ -30,7 +30,7 @@ class App extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor="#1E1E24" translucent={false} />
-        <WebView source={{uri: 'https://keyujin.cn'}} />
+        <WebView source={{uri: 'https://keyujin.com'}} />
       </SafeAreaView>
     );
   }
