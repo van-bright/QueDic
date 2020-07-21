@@ -54,7 +54,7 @@ class App extends React.Component {
         <StatusBar backgroundColor="#1E1E24" translucent={false} />
         <WebView
           ref={(r) => (this.webview = r)}
-          source={{uri: 'https://keyujin.cn'}}
+          source={{uri: 'https://keyujin.com'}}
           mixedContentMode={'always'}
           onNavigationStateChange={(navState) => {
             // Keep track of going back navigation within component
