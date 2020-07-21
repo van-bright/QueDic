@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.jinkeye"
+        applicationId "com.quedic"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
