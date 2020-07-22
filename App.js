@@ -7,7 +7,13 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, Platform, StatusBar} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  BackHandler,
+} from 'react-native';
 import {WebView} from 'react-native-webview';
 
 class App extends React.Component {
@@ -15,12 +21,28 @@ class App extends React.Component {
     super(props);
   }
 
+  backAction = () => {
+    if (this.canGoBack) {
+      this.webview.goBack();
+      return true;
+    }
+    return false;
+  };
+
   componentDidMount() {
     StatusBar.setBarStyle('light-content');
     if (Platform.OS === 'android') {
       StatusBar.setBackgroundColor('#1E1E24');
       StatusBar.setTranslucent(false);
     }
+    this.backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.backAction,
+    );
+  }
+
+  componentWillUnmount() {
+    this.backHandler?.remove();
   }
 
   // https://quedic.com/
@@ -31,8 +53,13 @@ class App extends React.Component {
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor="#1E1E24" translucent={false} />
         <WebView
+          ref={(r) => (this.webview = r)}
           source={{uri: 'https://keyujin.cn'}}
           mixedContentMode={'always'}
+          onNavigationStateChange={(navState) => {
+            // Keep track of going back navigation within component
+            this.canGoBack = navState.canGoBack;
+          }}
         />
       </SafeAreaView>
     );
